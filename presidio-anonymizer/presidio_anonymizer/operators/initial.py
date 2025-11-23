@@ -10,11 +10,17 @@ class Initial(Operator):
 
     def operate(self, text: str = None, params: Dict = None) -> str:
         """Take the text, and return the first letter of each word found with periods between each."""
-        words = text.split()
+        words = text.upper().split()
         initials = ""
         for word in words:
-            initials += word[0] + ". "
-        print(initials.strip())
+            word_represented = False
+            for i in range(0, len(word)):
+                if word[i].isalnum():
+                    initials += word[0:i+1] + ". "
+                    word_represented = True
+                    break
+            if not word_represented: # don't lose fully non-alnum words
+                initials += word + ". "
         return initials.strip()
 
     def validate(self, params: Dict = None) -> None:
