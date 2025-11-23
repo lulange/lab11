@@ -10,7 +10,12 @@ class Initial(Operator):
 
     def operate(self, text: str = None, params: Dict = None) -> str:
         """Take the text, and return the first letter of each word found with periods between each."""
-        return ""
+        words = text.split()
+        initials = ""
+        for word in words:
+            initials += word[0] + ". "
+        print(initials.strip())
+        return initials.strip()
 
     def validate(self, params: Dict = None) -> None:
         """Initial does not require any parameters so no validation is needed."""
